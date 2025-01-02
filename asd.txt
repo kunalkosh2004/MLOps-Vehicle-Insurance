@@ -1,8 +1,0 @@
-mongodb->
-harshkosh200407
-FjryEV2b72m8wCrg
-
-mongodb+srv://harshkosh200407:upYReI0JaymhcgbE@cluster0.49ic3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-
-set: export MONGODB_URL="mongodb+srv://harshkosh200407:upYReI0JaymhcgbE@cluster0.49ic3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-check: echo $MONGODB_URL
