@@ -57,11 +57,13 @@ class DataIngestion:
             train_set, test_set = train_test_split(dataframe,test_size=self.data_ingestion_config.train_test_split_ratio)
             logging.info("Performed train test split on the dataframe")
             logging.info("Exited split_data_as_train_test of Data_Ingestion class")
-            
-            dir_path = os.path.join(self.data_ingestion_config.training_file_path)
+            print(self.data_ingestion_config.data_ingestion_ingestion_dir)
+            dir_path = os.path.join(self.data_ingestion_config.data_ingestion_ingestion_dir)
             os.makedirs(dir_path,exist_ok=True)
             
             logging.info(f"Exporting train ans test file path")
+            print(self.data_ingestion_config.training_file_path)
+            print(self.data_ingestion_config.testing_file_path)
             train_set.to_csv(self.data_ingestion_config.training_file_path,index=False,header=True)
             test_set.to_csv(self.data_ingestion_config.testing_file_path,index=False,header=True)
             
@@ -91,7 +93,7 @@ class DataIngestion:
             
             logging.info("Exited from initaite_data_ingestion of Data_Ingestion class")
             
-            data_ingestion_artifact = DataIngestionArtifact(train_file_path = self.data_ingestion_config.training_file_path,
+            data_ingestion_artifact = DataIngestionArtifact(trained_file_path = self.data_ingestion_config.training_file_path,
                                                             test_file_path = self.data_ingestion_config.testing_file_path)
             
             logging.info(f"Data ingestion artifact: {data_ingestion_artifact}")
