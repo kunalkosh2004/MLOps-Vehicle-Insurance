@@ -58,12 +58,14 @@ class DataIngestion:
             logging.info("Performed train test split on the dataframe")
             logging.info("Exited split_data_as_train_test of Data_Ingestion class")
             
-            dir_path = os.path.join(self.data_ingestion_config.training_file_path)
+            dir_path = os.path.join(self.data_ingestion_config.data_ingestion_ingested_dir)
             os.makedirs(dir_path,exist_ok=True)
             
             logging.info(f"Exporting train ans test file path")
-            train_set.to_csv(self.data_ingestion_config.training_file_path,index=False,header=True)
-            test_set.to_csv(self.data_ingestion_config.testing_file_path,index=False,header=True)
+            train_file_path_ = self.data_ingestion_config.training_file_path
+            test_file_path_ = self.data_ingestion_config.testing_file_path
+            train_set.to_csv(train_file_path_,index=False,header=True)
+            test_set.to_csv(test_file_path_,index=False,header=True)
             
             logging.info(f"Exporting train and test file path.")
         
