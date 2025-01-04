@@ -164,19 +164,17 @@ class DataTransformation:
             
             dir_path = os.path.join(self.data_transformation_config.data_transformation_transformed_dir)
             os.makedirs(dir_path,exist_ok=True)
-            print(dir_path)
+            # print(dir_path)
             
-            train_file_path_ = self.data_transformation_config.transformed_train_file_path
-            test_file_path_ = self.data_transformation_config.transformed_test_file_path
-            save_numpy_array_data(train_file_path_,array=train_arr)
-            save_numpy_array_data(test_file_path_,array=test_arr)
+            save_numpy_array_data(file_path=self.data_transformation_config.transformed_train_file_path,array=train_arr)
+            save_numpy_array_data(file_path=self.data_transformation_config.transformed_test_file_path,array=test_arr)
             logging.info("Saving transformation object and transformed files.")
 
             logging.info("Data transformation completed successfully")
             return DataTransformationArtifact(
                 transformed_object_file_path = self.data_transformation_config.transformed_object_file_path,
-                transformed_train_file_path = train_file_path_,
-                transformed_test_file_path = test_file_path_
+                transformed_train_file_path = self.data_transformation_config.transformed_train_file_path,
+                transformed_test_file_path = self.data_transformation_config.transformed_test_file_path
             )            
         except Exception as e:
             raise MyException(e,sys)

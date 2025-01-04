@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score, precision_score, f1_score, recall_sc
 from src.exception import MyException
 from src.logger import logging
 from src.utils.main_utils import load_numpy_array_data, load_object, save_object
-from src.entity.config_entity import ModelTrainerConfig
+from src.entity.config_entity import ModelTrainerConfig, DataTransformationConfig
 from src.entity.artifact_entity import DataTransformationArtifact, ModelTrainerArtifact, ClassificationMetricArtifact
 from src.entity.estimator import MyModel
 
@@ -34,7 +34,7 @@ class ModelTrainer:
             logging.info("Training RandomForestClassifier with specified params")
             
             # Splitting the train and test data into features and target values
-            x_train, y_train, x_test, x_test = train[:,:-1], train[:,-1], test[:,:-1], test[:,-1]
+            x_train, y_train, x_test, y_test = train[:,:-1], train[:,-1], test[:,:-1], test[:,-1]
             logging.info('Train-Test split done')
             
             # Initialize RandomForestClassifier with specified params
@@ -50,7 +50,7 @@ class ModelTrainer:
             # Fit the model
             logging.info("Model Training going on....")
             model.fit(x_train,y_train)
-            logging.inof("Model Training completed")
+            logging.info("Model Training completed")
             
             # Prediction and evaluations
             y_pred = model.predict(x_test)
@@ -79,8 +79,8 @@ class ModelTrainer:
             print("------------------------------------------------------------------------------------------------")
             print("Starting Model Trainer Component")
             # Load Transformed train and test data
-            train_arr = load_numpy_array_data(file_path = self.data_transformation_artifact.transformed_train_file_path)
-            test_arr = load_numpy_array_data(file_path = self.data_transformation_artifact.transformed_test_file_path)
+            train_arr = load_numpy_array_data(file_path = DataTransformationConfig.transformed_train_file_path)
+            test_arr = load_numpy_array_data(file_path = DataTransformationConfig.transformed_test_file_path)
             logging.info("train-test data loaded")
             
             # Train model and get metrics
@@ -88,7 +88,7 @@ class ModelTrainer:
             logging.info("Model object and artifact loaded.")
             
             # Load preprocessing object
-            preprocessing_obj = load_object(file_path = self.data_transformation_artifact.transformed_object_file_path)
+            preprocessing_obj = load_object(file_path = DataTransformationConfig.transformed_object_file_path)
             logging.info("Preprocessing object loaded")
             
             # Checl if model's acc meets the expected threshold
@@ -98,7 +98,7 @@ class ModelTrainer:
             
             # Save the final model object that includes both preprocessign and the trained model
             logging.info("Saving new model as performance is better than previous one. ")
-            my_model = MyModel(preprocessign_object = preprocessing_obj, trained_model_object = trained_model)
+            my_model = MyModel(preprocessing_object = preprocessing_obj, trained_model_object = trained_model)
             save_object(self.model_trainer_config.trained_model_file_path, my_model)
             logging.info("Saved final model object that includes both preprocessing and the trained model")
             
