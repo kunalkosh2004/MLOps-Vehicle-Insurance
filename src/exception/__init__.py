@@ -2,14 +2,7 @@ import sys
 import logging
 
 def error_message_detail(error: Exception, error_detail: sys) -> str:
-    """
-    Extracts detailed error information including file name, line number, and the error message.
 
-    :param error: The exception that occurred.
-    :param error_detail: The sys module to access traceback details.
-    :return: A formatted error message string.
-    """
-    
     # Extract traceback details (exp info)
     _, _, exc_tb = error_detail.exc_info()
     

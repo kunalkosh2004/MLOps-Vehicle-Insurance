@@ -39,7 +39,7 @@ class MyModel:
             
             # Step 2: Perform prediction using the trained model
             logging.info("Using the trained model to get prediction")
-            predictions = self.trained_model_object.predict(transfored_feature)
+            predictions = self.trained_model_object.predict(transformed_feature)
             
             return predictions
         except Exception as e:
