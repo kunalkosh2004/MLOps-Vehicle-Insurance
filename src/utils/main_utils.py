@@ -41,11 +41,6 @@ def load_object(file_path:str) -> object:
         raise MyException(e,sys)
     
 def save_numpy_array_data(file_path:str, array:np.array) -> None:
-    """
-    Save numpy array data to file
-    file_path: str location of file to save
-    array: np.array data to save
-    """
     try:
         # dir_path = os.path.join(file_path)
         # os.makedirs(dir_path, exist_ok=True)

@@ -69,4 +69,4 @@ MODEL_BUCKET_NAME = "vehicle-proj"
 MODEL_PUSHER_S3_KEY = "model-registry"
 
 APP_HOST = "0.0.0.0"
-APP_PORT = 5000
+APP_PORT = 8080
